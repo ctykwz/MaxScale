@@ -66,5 +66,10 @@ int main(int argc, char** argv)
     double_cursor(test, test.maxscales->conn_rwsplit[0]);
     test.maxscales->disconnect();
 
+    test.tprintf("Testing with direct connection...");
+    MYSQL* conn = open_conn_db_timeout(test.repl->port[0], test.repl->IP[0], "test", test.repl->user_name, test.repl->password, 50, false);
+    double_cursor(test, test.maxscales->conn_rwsplit[0]);
+    mysql_close(conn);
+
     return test.global_result;
 }
